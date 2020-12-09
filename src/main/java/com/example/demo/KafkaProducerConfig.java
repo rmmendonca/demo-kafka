@@ -11,6 +11,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
+import com.example.demo.objectsForTopic.Greeting;
+
 import java.util.HashMap;
 
 @Configuration
@@ -19,6 +21,10 @@ public class KafkaProducerConfig {
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
 
+	/*
+	 * configurações para a fábrica de produções para Strings (pode-se usar somente
+	 * esta, e os produtores e consumidores serializam o objeto utilizando o mapper)
+	 */
     @Bean
     public ProducerFactory<String, String> stringProducerFactory() {
         val configs = new HashMap<String, Object>();
@@ -28,11 +34,14 @@ public class KafkaProducerConfig {
         return new DefaultKafkaProducerFactory<>(configs);
     }
 
+    //kafka template para criação de mensagens String
     @Bean
     public KafkaTemplate<String, String> stringKafkaTemplate() {
         return new KafkaTemplate<>(stringProducerFactory());
     }
 
+    
+    //configurações para a fábrica de produções do objeto GREETING
     @Bean
     public ProducerFactory<String, Greeting> greetingProducerFactory() {
         val configs = new HashMap<String, Object>();
@@ -42,6 +51,7 @@ public class KafkaProducerConfig {
         return new DefaultKafkaProducerFactory<>(configs);
     }
 
+    //kafka template para criação de mensagens com o objeto GREETING
     @Bean
     public KafkaTemplate<String, Greeting> greetingKafkaTemplate() {
         return new KafkaTemplate<>(greetingProducerFactory());

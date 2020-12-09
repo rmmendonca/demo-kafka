@@ -12,12 +12,26 @@ import java.util.HashMap;
 
 @Configuration
 public class KafkaTopicConfig {
+	
+	/*
+	 * Classe para configurar a criação de novos tópicos, são criados na
+	 * inicialização, recomendado.
+	 * 
+	 * Caso um tópico não seja explicitamente criado, quando for enviada
+	 * uma mensagem para ele, o tópico é criado automaticamente com 1
+	 * partição e com fator de replicação = 1.
+	 * 
+	 * -particoes : numero de partições em que o tópico é "espalhado" entre
+	 * diferentes kafka brokers
+	 * sobre tunning de particionamento de topicos
+	 * https://docs.cloudera.com/runtime/7.2.1/kafka-performance-tuning/topics/kafka-tune-sizing-partition-number.html
+	 * 
+	 * -fator de replicação: copia dos dados em multiplos hosts (a documentação 
+	 * indica 3 em ambiente de produção)
+	 */
 
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
-
-    @Value(value = "${greeting.topic.name}")
-    private String greetingTopic;
 
     @Bean
     public KafkaAdmin kafkaAdmin() {
@@ -26,9 +40,11 @@ public class KafkaTopicConfig {
         return new KafkaAdmin(configs);
     }
 
+    
+    //criacao de tópico
     @Bean
     public NewTopic topic1() {
-        return new NewTopic(greetingTopic, 1, (short) 1);
+        return new NewTopic("topico.coiso", 1, (short) 1);
     }
 
 }
