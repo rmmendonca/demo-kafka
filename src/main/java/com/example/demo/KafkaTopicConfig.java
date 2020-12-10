@@ -44,7 +44,12 @@ public class KafkaTopicConfig {
     //criacao de tópico
     @Bean
     public NewTopic topic1() {
-        return new NewTopic("topico.coiso", 1, (short) 1);
+        return new NewTopic("topico.coiso", 5, (short) 1);
+    }
+    
+    @Bean
+    public NewTopic topic2() {
+        return new NewTopic("topico.coiso.string", 5, (short) 1);
     }
 
 }

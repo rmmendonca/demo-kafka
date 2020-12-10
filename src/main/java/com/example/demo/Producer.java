@@ -12,11 +12,19 @@ public class Producer {
 
     @Autowired
     private KafkaTemplate<String, Greeting> greetingKafkaTemplate;
+    
+    @Autowired
+    private KafkaTemplate<String, String> stringKafkaTemplate;
 
 
     public void send() {
         greetingKafkaTemplate.send("topico.coisoquenaoexisteainda", new Greeting("hello", "world"));
         System.out.println("Mensagem enviada");
+    }
+    
+    public void sendString(String topico, String s) {
+    	stringKafkaTemplate.send(topico, s);
+        System.out.println("Mensagem String enviada");
     }
 
 }

@@ -15,5 +15,11 @@ public class Controller {
         producer.send();
         return "Ola";
     }
+    
+    @GetMapping("/send-string")
+    public String sendString() {
+        producer.sendString("topico.coiso.string", "mensagemString");
+        return "Ola String!";
+    }
 
 }

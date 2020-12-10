@@ -18,5 +18,17 @@ public class Consumer {
         System.out.println("acordou..");
         System.out.println(greeting.getMsg() + ", " + greeting.getName());
     }
+    
+    
+    @KafkaListener(topics = "topico.coiso.string",
+            containerFactory = "stringKafkaListenerContainerFactory",
+            groupId = "grupo.teste.do.coiso.string") //faz overide do grupo de consumo da configuração do containerFactory
+    public void onStringListener(String s) throws InterruptedException {
+        System.out.println("MensagemString recebida");
+        System.out.println(s);
+        System.out.println("string dormiu..");
+        Thread.sleep(10000);
+        System.out.println("string acordou..");
+    }
 
 }
