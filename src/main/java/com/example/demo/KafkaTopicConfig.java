@@ -25,6 +25,7 @@ public class KafkaTopicConfig {
 	 * diferentes kafka brokers
 	 * sobre tunning de particionamento de topicos
 	 * https://docs.cloudera.com/runtime/7.2.1/kafka-performance-tuning/topics/kafka-tune-sizing-partition-number.html
+	 * https://www.allprogrammingtutorials.com/tutorials/configuring-messages-retention-time-in-kafka.php
 	 * 
 	 * -fator de replicação: copia dos dados em multiplos hosts (a documentação 
 	 * indica 3 em ambiente de produção)
