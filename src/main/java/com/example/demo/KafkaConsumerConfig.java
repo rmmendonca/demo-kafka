@@ -25,6 +25,8 @@ public class KafkaConsumerConfig {
     private String bootstrapAddress;
 
     //Fábrica de consumo e suas configurações
+    //Por padrão, as fábricas de consumo só consomem as mensagens de um tópico criadas posteriormente a sua criação 
+    //        configs.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); //para processar mensagens anteriores a criação do grupo de consumo
     @Bean
     public ConsumerFactory<String, String> stringConsumerFactory() {
         val configs = new HashMap<String, Object>();
